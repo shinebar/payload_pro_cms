@@ -1,11 +1,43 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload';
+
+// 简单的 slug 生成函数
+const generateSlug = (title: string): string => {
+    return title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '') // 移除特殊字符
+        .replace(/\s+/g, '-') // 将空格替换为连字符
+        .replace(/-+/g, '-') // 将多个连字符替换为一个
+        .trim();
+};
 
 const Posts: CollectionConfig = {
     slug: 'posts',
+    admin: {
+        useAsTitle: 'title',
+    },
     access: {
-        create: ({ req: { user } }) => user?.role === 'admin',
-        update: ({ req: { user } }) => user?.role === 'admin',
-        delete: ({ req: { user } }) => user?.role === 'admin',
+        create: ({ req: { user } }) => {
+            return user?.role === 'admin';
+        },
+        update: ({ req: { user } }) => {
+            return user?.role === 'admin';
+        },
+        delete: ({ req: { user } }) => {
+            return user?.role === 'admin';
+        },
+        read: () => true, // 允许所有人读取
+    },
+    hooks: {
+        beforeChange: [
+            ({ data, operation }) => {
+                if (operation === 'create' || operation === 'update') {
+                    if (data.title && !data.slug) {
+                        data.slug = generateSlug(data.title);
+                    }
+                }
+                return data;
+            },
+        ],
     },
     fields: [
         {
@@ -14,18 +46,8 @@ const Posts: CollectionConfig = {
             required: true,
             unique: true,
             admin: {
-                description: '文章的 URL 友好标识',
+                position: 'sidebar',
             },
-            hooks: {
-                beforeValidate: [
-                    ({ value, data }) => {
-                        if (!value && data?.title) {
-                            return data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
-                        }
-                        return value;
-                    }
-                ]
-            }
         },
         {
             name: 'title',
@@ -43,34 +65,17 @@ const Posts: CollectionConfig = {
                 {
                     name: 'tag',
                     type: 'text',
-                }
-            ]
+                },
+            ],
         },
         {
             name: 'publishedAt',
             type: 'date',
             admin: {
-                date: {
-                    pickerAppearance: 'dayAndTime',
-                }
+                position: 'sidebar',
             },
         },
     ],
-    hooks: {
-        afterChange: [
-            async ({ doc, operation, req }) => {
-                if (operation === 'create' && !doc.publishedAt) {
-                    await req.payload.update({
-                        collection: 'posts',
-                        id: doc.id,
-                        data: {
-                            publishedAt: new Date().toISOString(),
-                        }
-                    });
-                }
-            }
-        ]
-    }
 };
 
 export default Posts;
