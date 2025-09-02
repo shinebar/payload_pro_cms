@@ -64,6 +64,9 @@ export default buildConfig({
       url: process.env.DATABASE_URI || '',
     },
   }),
+  graphQL: {
+    disable: true,
+  },
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
