@@ -38,6 +38,19 @@ const Posts: CollectionConfig = {
                 return data;
             },
         ],
+        afterChange: [
+            async ({ doc, operation, req }) => {
+                if (operation === 'create' && !doc.publishedAt) {
+                    await req.payload.update({
+                        collection: 'posts',
+                        id: doc.id,
+                        data: {
+                            publishedAt: new Date().toISOString(),
+                        }
+                    });
+                }
+            }
+        ],
     },
     fields: [
         {
@@ -72,7 +85,9 @@ const Posts: CollectionConfig = {
             name: 'publishedAt',
             type: 'date',
             admin: {
-                position: 'sidebar',
+                date: {
+                    pickerAppearance: 'dayAndTime',
+                }
             },
         },
     ],
