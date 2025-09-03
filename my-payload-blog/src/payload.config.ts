@@ -32,6 +32,9 @@ export default buildConfig({
       url: process.env.DATABASE_URI || '',
     },
   }),
+  graphQL: {
+    disable: true,
+  },
   sharp,
   plugins: [
     payloadCloudPlugin(),
