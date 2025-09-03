@@ -1,2 +1,6 @@
+问题1:
 getFromImportMap: PayloadComponent not found in importMap {key: "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField"PayloadComponent: "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField"schemaPath: "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField"} "You may need to run the `payload generate:importmap` command to generate the importMap ahead of runtime."
-
+问题2:
+[Error: Mismatching "react" dependency versions found: react-dom@19.1.1 (Please change this to 19.1.0). All "react" packages must have the same version. This is an error with your set-up, not a bug in Payload. Please go to your package.json and ensure all "react" packages have the same version.]
+ ⨯ unhandledRejection: [Error: Mismatching "react" dependency versions found: react-dom@19.1.1 (Please change this to 19.1.0). All "react" packages must have the same version. This is an error with your set-up, not a bug in Payload. Please go to your package.json and ensure all "react" packages have the same version.]
+ ⨯ unhandledRejection:  [Error: Mismatching "react" dependency versions found: react-dom@19.1.1 (Please change this to 19.1.0). All "react" packages must have the same version. This is an error with your set-up, not a bug in Payload. Please go to your package.json and ensure all "react" packages have the same version.]
