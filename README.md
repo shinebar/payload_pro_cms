@@ -24,19 +24,21 @@
 ```
 payload-cms-project/
 ├── src/
+│   │── app/
 │   ├── collections/
-│   │   ├── Posts.ts          # 文章集合定义
-│   │   └── Users.ts          # 用户集合定义
-│   ├── app/
-│   │   └── api/
-│   │       └── posts/
-│   │           └── route.ts  # 公开 API 路由
+│      │   ├── Posts.ts          # 文章集合定义
+│      │   └── Users.ts          # 用户集合定义
+│      │   └── media.ts          # 用户集合定义
+│      └── my-route/
+│      │      └── route.ts  # 公开 API 路由
+│       │ ── globals
+│            │── header
+│                │──config.ts
 │   ├── payload.config.ts     # Payload 配置文件
-│   └── server.ts            # 服务器入口文件
+│   ├── payload.types.ts      # Payload types文件
 ├── .env                     # 环境变量
 ├── package.json
 ├── tsconfig.json
-├── nodemon.json
 └── README.md
 ```
 
@@ -65,7 +67,8 @@ PAYLOAD_SECRET=your-super-secret-key
 
 ### 4. 数据库配置
 
-项目使用 SQLite 数据库，数据库文件将自动创建在项目根目录下的 `.db_` 文件中。
+项目使用 SQLite 数据库，数据库文件将自动创建在项目根目录下的 `my-payload-blog.db` 文件中。
+
 
 ## 运行项目
 
