@@ -1,7 +1,14 @@
 import { GlobalConfig } from 'payload'
-
+import { onlyAdmin } from '../../utils/util'
 export const Header: GlobalConfig = {
     slug: 'header',
+    access: {
+        update: onlyAdmin,
+        read: (): boolean => true,
+    },
+    admin: {
+        group: 'Navigation',
+    },
     fields: [
         {
             type: 'array',
@@ -23,3 +30,4 @@ export const Header: GlobalConfig = {
         }
     ]
 }
+export default Header
