@@ -26,14 +26,17 @@ payload-cms-project/
 ├── src/
 │   │── app/
 │   ├── collections/
-│      │   ├── Posts.ts          # 文章集合定义
-│      │   └── Users.ts          # 用户集合定义
-│      │   └── media.ts          # 用户集合定义
-│      └── my-route/
-│      │      └── route.ts  # 公开 API 路由
-│       │ ── globals
-│            │── header
-│                │──config.ts
+│   │   │   ├── Posts.ts          # 文章集合定义
+│   │   │   └── Users.ts          # 用户集合定义
+│   │  │   └── media.ts          # 用户集合定义
+│   │  └── my-route/
+│   │  │      └── route.ts  # API 路由
+│   └── api/
+│   │  └── posts/
+│   │           └── route.ts  # 自定义 API for posts
+│   │ ── globals
+│   │  │── header
+│   │      │──config.ts
 │   ├── payload.config.ts     # Payload 配置文件
 │   ├── payload.types.ts      # Payload types文件
 ├── .env                     # 环境变量
