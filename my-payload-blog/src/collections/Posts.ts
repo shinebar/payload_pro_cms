@@ -1,3 +1,4 @@
+import { onlyAdmin } from '@/utils/util';
 import { CollectionConfig } from 'payload';
 
 // 简单的 slug 生成函数
@@ -16,15 +17,9 @@ const Posts: CollectionConfig = {
         useAsTitle: 'title',
     },
     access: {
-        create: ({ req: { user } }) => {
-            return user?.role === 'admin';
-        },
-        update: ({ req: { user } }) => {
-            return user?.role === 'admin';
-        },
-        delete: ({ req: { user } }) => {
-            return user?.role === 'admin';
-        },
+        create: onlyAdmin,
+        update: onlyAdmin,
+        delete: onlyAdmin,
         read: () => true, // 允许所有人读取
     },
     hooks: {

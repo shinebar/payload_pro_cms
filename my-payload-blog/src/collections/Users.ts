@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { onlyAdmin } from '@/utils/util'
+
 export const Users: CollectionConfig = {
   slug: 'users',
   admin: {
@@ -9,9 +11,9 @@ export const Users: CollectionConfig = {
     // 已登录即可进入 Admin 查看该集合
     admin: ({ req }) => Boolean(req.user),
     // 仅 admin 可创建 / 更新 / 删除
-    create: ({ req: { user } }) => user?.role === 'admin',
-    update: ({ req: { user } }) => user?.role === 'admin',
-    delete: ({ req: { user } }) => user?.role === 'admin',
+    create: onlyAdmin,
+    update: onlyAdmin,
+    delete: onlyAdmin,
     // 已登录用户可读取
     read: ({ req }) => Boolean(req.user),
   },
